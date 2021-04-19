@@ -1,0 +1,206 @@
+<html lang="en"><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><style lang="en" type="text/css" id="dark-mode-custom-style"></style><style lang="en" type="text/css" id="dark-mode-native-style"></style><head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>CodePen - Tab Bar Animation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Poppins:400&amp;display=swap" rel="stylesheet">
+  
+  
+  
+<style>
+/* Variables */
+/* Reset */
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Generic */
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  background: #F5F5F6;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: #29434e;
+  font-size: 11px;
+}
+
+/**/
+#active,
+#active-2,
+#active-3 {
+  position: absolute;
+  left: 10px;
+  height: 30px;
+  width: 100px;
+  z-index: 0;
+  transition: left 0.5s ease-out;
+  border-radius: 20px;
+}
+
+#active-2,
+#active-3 {
+  width: 30px;
+  transition: left 0.5s ease-out 0.075s;
+}
+
+/**/
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 420px;
+  height: 45px;
+  padding: 0 10px;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+}
+.menu__item {
+  width: 100px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.menu__icon {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  margin-right: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0);
+  transition: 0.5s ease-out;
+  z-index: 100;
+}
+.menu__text {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 100;
+}
+
+/**/
+.is-icon-visible {
+  position: inherit;
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  transition: 0.35s;
+}
+
+.is-text-visible {
+  color: white;
+}
+
+.is-item-animated {
+  animation: change 0.35s ease-out;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no">
+  <nav class="menu"><a class="menu__item" id="i-0"><img class="menu__icon is-icon-visible" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyI+CgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5v%0D%0AbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSI0MDIiIHdpZHRoPSI1ODIiIHk9Ii0x%0D%0AIiB4PSItMSIvPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxwYXRoIGZp%0D%0AbGw9IiNmZmZmZmYiIGlkPSJzdmdfMSIgZD0ibTIwLDQwbDAsLTEybDgsMGwwLDEybDEwLDBsMCwt%0D%0AMTZsNiwwbC0yMCwtMThsLTIwLDE4bDYsMGwwLDE2bDEwLDB6Ii8+CiA8L2c+Cjwvc3ZnPg=="><span class="menu__text is-text-visible">HOME</span></a><a class="menu__item" id="i-1"><img class="menu__icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyI+CgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5v%0D%0AbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSI0MDIiIHdpZHRoPSI1ODIiIHk9Ii0x%0D%0AIiB4PSItMSIvPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxwYXRoIGZp%0D%0AbGw9IiNmZmZmZmYiIGlkPSJzdmdfMSIgZD0ibTI0LDhjLTQuNDIsMCAtOCwzLjU4IC04LDhjMCw0%0D%0ALjQxIDMuNTgsOCA4LDhzOCwtMy41OSA4LC04YzAsLTQuNDIgLTMuNTgsLTggLTgsLTh6bTAsMjBj%0D%0ALTUuMzMsMCAtMTYsMi42NyAtMTYsOGwwLDRsMzIsMGwwLC00YzAsLTUuMzMgLTEwLjY3LC04IC0x%0D%0ANiwtOHoiLz4KIDwvZz4KPC9zdmc+"><span class="menu__text">PROFILE</span></a><a class="menu__item" id="i-2"><img class="menu__icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyI+CgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5v%0D%0AbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSI0MDIiIHdpZHRoPSI1ODIiIHk9Ii0x%0D%0AIiB4PSItMSIvPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxwYXRoIGlk%0D%0APSJzdmdfMSIgZmlsbD0ibm9uZSIgZD0ibTAsMGw0OCwwbDAsNDhsLTQ4LDBsMCwtNDh6Ii8+CiAg%0D%0APHBhdGggZmlsbD0iI2ZmZmZmZiIgaWQ9InN2Z18yIiBkPSJtMjQsNDIuN2wtMi45LC0yLjYzYy0x%0D%0AMC4zLC05LjM1IC0xNy4xLC0xNS41MiAtMTcuMSwtMjMuMDdjMCwtNi4xNyA0LjgzLC0xMSAxMSwt%0D%0AMTFjMy40OCwwIDYuODIsMS42MiA5LDQuMTdjMi4xOCwtMi41NSA1LjUyLC00LjE3IDksLTQuMTdj%0D%0ANi4xNywwIDExLDQuODMgMTEsMTFjMCw3LjU1IC02LjgsMTMuNzIgLTE3LjEsMjMuMDdsLTIuOSwy%0D%0ALjYzeiIvPgogPC9nPgo8L3N2Zz4="><span class="menu__text">LIKES</span></a><a class="menu__item" id="i-3"><img class="menu__icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAw%0D%0AL3N2ZyI+CgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5v%0D%0AbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSI0MDIiIHdpZHRoPSI1ODIiIHk9Ii0x%0D%0AIiB4PSItMSIvPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxwYXRoIGlk%0D%0APSJzdmdfMSIgZmlsbD0ibm9uZSIgZD0ibTAsMGw0OCwwbDAsNDhsLTQ4LDBsMCwtNDh6Ii8+CiAg%0D%0APHBhdGggZmlsbD0iI2ZmZmZmZiIgaWQ9InN2Z18yIiBkPSJtMjAsNDBsOCwwbDAsLTMybC04LDBs%0D%0AMCwzMnptLTEyLDBsOCwwbDAsLTE2bC04LDBsMCwxNnptMjQsLTIybDAsMjJsOCwwbDAsLTIybC04%0D%0ALDB6Ii8+CiA8L2c+Cjwvc3ZnPg=="><span class="menu__text">STATS</span></a>
+  <div id="active" style="left: 10px; background: rgb(198, 167, 0);"></div>
+  <div id="active-2" class="is-item-animated" style="left: 10px; background: rgb(198, 167, 0);"></div>
+  <div id="active-3" class="is-item-animated" style="left: 70px; background: rgb(198, 167, 0);"></div>
+</nav>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  
+      <script id="rendered-js">
+const item = document.querySelectorAll(".menu__item");
+const icon = document.querySelectorAll(".menu__icon");
+const text = document.querySelectorAll(".menu__text");
+const active = document.querySelector("#active");
+const active2 = document.querySelector("#active-2");
+const active3 = document.querySelector("#active-3");
+let colors = ["#c6a700", "#c25e00", "#b91400", "#5c007a"];
+
+/* */
+let getItem = event => {
+  getIcon();
+  let indexItem = event.currentTarget.id;
+  indexItem = indexItem.split("i-").join("");
+
+  active.style.left = `${indexItem * 100 + 10}px`;
+  active.style.background = colors[indexItem];
+
+  active2.style.left = `${indexItem * 100 + 10}px`;
+  active2.style.background = colors[indexItem];
+  active2.classList.add("is-item-animated");
+
+  active3.style.left = `${indexItem * 100 + 70}px`;
+  active3.style.background = colors[indexItem];
+  active3.classList.add("is-item-animated");
+
+  event.currentTarget.children[0].classList.add("is-icon-visible");
+  event.currentTarget.children[1].classList.add("is-text-visible");
+
+  setTimeout(() => {
+    active.classList.remove("is-item-animated");
+  }, 300);
+
+};
+
+let getIcon = event => {
+  for (var i = 0; i < icon.length; i++) {if (window.CP.shouldStopExecution(0)) break;
+    icon[i].classList.remove("is-icon-visible");
+  }window.CP.exitedLoop(0);
+  for (var i = 0; i < text.length; i++) {if (window.CP.shouldStopExecution(1)) break;
+    text[i].classList.remove("is-text-visible");
+  }window.CP.exitedLoop(1);
+};
+
+let mainFunc = event => {
+  for (var i = 0; i < item.length; i++) {if (window.CP.shouldStopExecution(2)) break;
+    item[i].addEventListener("click", getItem);
+  }window.CP.exitedLoop(2);
+};
+/* */
+window.addEventListener("load", mainFunc);
+//# sourceURL=pen.js
+    </script>
+
+  
+
+
+
+
+ 
+</body></html>
